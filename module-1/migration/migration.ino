@@ -1,4 +1,4 @@
-// Migration — carrying home from Lebanon to New York.
+// The things we leave behind — carrying home from Lebanon to New York.
 // Each piece leaves the house, becomes a keepsake, and joins the new building.
 // Original TTGO T-Display: TFT_eSPI Setup25, 240 x 135 landscape.
 #include <TFT_eSPI.h>
@@ -407,7 +407,7 @@ void setup() {
   beginChapter(true);
   renderArtwork();
   lastFrame = millis();
-  Serial.printf("Migration ready: seed=%lu, free heap=%u\n", (unsigned long)seed, ESP.getFreeHeap());
+  Serial.printf("The things we leave behind ready: seed=%lu, free heap=%u\n", (unsigned long)seed, ESP.getFreeHeap());
 }
 
 void loop() {

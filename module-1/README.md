@@ -1,4 +1,4 @@
-# Migration
+# The things we leave behind
 
 **Kira Dabbagh · Module 1: Generative Art · Creative Embedded Systems, Fall 2026**
 

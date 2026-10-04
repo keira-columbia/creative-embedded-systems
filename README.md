@@ -6,7 +6,7 @@ This repository contains the public course landing page, with an introduction, l
 
 ## Projects
 
-- [Module 1: Migration — code, animation, and setup instructions](module-1/README.md)
+- [Module 1: The things we leave behind — code, animation, and setup instructions](module-1/README.md)
 
 ## Updating the site
 
