@@ -73,13 +73,15 @@ The display setup handles the board’s built-in connections: MOSI 19, clock 18,
 
 To experiment, change `MIGRATION_SPEED` near the top of the sketch, the waiting and travel ranges in `prepareJourney()`, or the `KEEPSAKES` pixel patterns. Each symbol stays with the same piece during its trip. Increasing `MIGRATION_SPEED` makes the journey faster; the pauses for viewing the buildings stay separate.
 
-## Installation documentation
+## Installation
 
-The class installation ran October 1–2, 2026, with battery-powered boards hanging in small paper envelopes. This still shows the working board before installation; photos of the display in class will be added here.
+For the October 1–2 class installation, I decorated a paper envelope with Lebanese and American flags, cedars, a yellow taxi, and a plane traveling between the two places. The screen sits in the center, and the finished piece hangs by a window.
 
-![The TTGO T-Display running Migration, with keepsakes moving between the two homes.](media/device-still.jpg)
+<img src="media/installation.jpg" alt="The decorated envelope hanging by the classroom window, with the ESP32 screen running in the center." width="420">
 
-*Still extracted from the device demo.*
+*The finished piece in the class installation, with the board attached.*
+
+The [project blog](https://keira-columbia.github.io/creative-embedded-systems/module-1/) includes the in-class video, the envelope-making process, and the story behind the design.
 
 ## Libraries and assets
 

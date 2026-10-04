@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Migration · Kira Dabbagh</title>
+<meta name="description" content="An ESP32 artwork about carrying memories of Lebanon into a new home in New York. Module 1, Creative Embedded Systems.">
+<style>
+:root{color-scheme:light;--ink:#30213e;--purple:#8244b0;--paper:#fcf8ff;--line:#e1d2eb;--muted:#695575}*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 90% 0,#efdefa,transparent 55%),var(--paper);color:var(--ink);font:18px/1.75 Arial,Helvetica,sans-serif}a{color:var(--purple);text-underline-offset:4px}a:hover{color:#512273}a:focus-visible{outline:3px solid var(--purple);outline-offset:5px}.wrap{max-width:1040px;margin:auto;padding:0 30px}header{padding:25px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:20px;font-size:14px}header a{text-decoration:none}.hero{padding:65px 0 40px}.meta{font:13px/1.6 'Courier New',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}h1{font:normal clamp(58px,10vw,100px)/1.05 Georgia,serif;letter-spacing:-.05em;margin:18px 0 22px}h1 span{color:var(--purple);font-style:italic}.dek{font:24px/1.5 Georgia,serif;max-width:620px}.links{display:flex;gap:22px;flex-wrap:wrap;font-size:15px}.copy{max-width:700px;margin:auto}section{padding:30px 0}h2{font:normal 32px/1.25 Georgia,serif;margin:0 0 20px}p{margin:0 0 20px}figure{margin:28px 0}img,video{display:block;max-width:100%;height:auto;border-radius:12px}figcaption{font-size:14px;line-height:1.6;color:var(--muted);margin-top:12px}.media{max-width:480px;margin:28px auto}.media video{width:100%;max-height:640px;background:#1e1526}.photos{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:20px 0 38px}.photos figure{margin:0}.photos img{width:100%;height:auto}code{font-size:.88em;background:#f0e5f6;padding:2px 5px;border-radius:4px}.end{border-top:1px solid var(--line);margin-top:20px;padding-top:30px}footer{border-top:1px solid var(--line);padding:25px 0 35px;margin-top:45px;font-size:14px;color:var(--muted)}@media(max-width:620px){.wrap{padding:0 22px}.hero{padding:40px 0 20px}body{font-size:17px}.photos{grid-template-columns:1fr;max-width:440px;margin:20px auto}.dek{font-size:22px}h2{font-size:28px}header{flex-wrap:wrap}.media video{max-height:560px}} 
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><a href="../">← Kira Dabbagh · Course journal</a><a href="https://github.com/keira-columbia/creative-embedded-systems/tree/main/module-1">Code &amp; README ↗</a></header>
+<main>
+<div class="hero"><div class="meta">Module 1 · Generative art · Fall 2026</div><h1><span>Migration</span></h1><p class="dek">The things we bring with us, even when they don’t fit in a suitcase.</p><div class="links"><a href="#in-class">Watch it in class</a><a href="#envelope">The paper envelope</a></div></div>
+<div class="copy">
+<section aria-labelledby="home"><h2 id="home">What home feels like</h2>
+<p>When I think about what I miss in Lebanon, I think about waking up in the mountains. The smell of coffee. Looking out of my window at the cedars. My grandparents insisting that I eat more, then asking what I want to eat next. Those small things are what make home feel like home to me.</p>
+<p>I wanted this project to be about my move from Lebanon to New York, but I wanted it to carry those details too. The coffee cup, the cedar, and the little grandparents on the screen stand for things I miss. The idea is that moving somewhere new doesn’t mean starting from nothing. You bring people, habits, and memories with you, and they become part of the life you build there.</p>
+</section>
+<section aria-labelledby="in-class"><h2 id="in-class">The piece running in class</h2>
+<p>The animation starts with a Lebanese stone house. Pieces leave it at different times, become small keepsakes, and travel across the screen. They gradually come together as a tall glass building in New York. One sun rises on the Lebanon side, crosses the sky, and sets on the New York side.</p>
+<figure class="media"><video controls playsinline preload="metadata" aria-label="In-class video of Migration running inside the decorated paper envelope"><source src="media/in-class-demo.mp4" type="video/mp4">Your browser does not support embedded video. <a href="media/in-class-demo.mp4">Watch the video here.</a></video><figcaption>The board running inside the decorated envelope in class, before it was hung by the window. This is a different recording from the close-up GIF in the README.</figcaption></figure>
+</section>
+<section aria-labelledby="changes"><h2 id="changes">Finding the right way to tell it</h2>
+<p>The first version was too abstract. Particles moved from left to right, but I couldn’t really see the two homes or understand the change between them. I wanted to watch the old home break apart and the new one take shape.</p>
+<p>I moved toward photographic building images because the drawn versions still felt too much like simple sketches. The contrast between a small stone home and a luxury glass skyscraper made the difference between the two places much clearer. Neither image is my actual home; they represent the two settings.</p>
+<p>The moving dots also needed more meaning. I turned them into cedars, coffee cups, family figures, and suitcases. The small screen means these have to be simple pixel shapes, but their identities matter: the same traveling piece becomes part of the new building when it arrives.</p>
+<p>I added orange and blue skies to make the warm and cool contrast stronger. At first there were two suns, but I wanted it to be the same sun moving between both places. I also shortened the journey to roughly 40 seconds so someone could stay with it long enough to see the transformation.</p>
+</section>
+<section aria-labelledby="code"><h2 id="code">A different journey each time</h2>
+<p>The homes are known, but the routes between them change. The program uses <code>random()</code> to choose when pieces leave, how their paths bend, how long they take, and whether they slow down or briefly turn back. A few wait longer before leaving. Eventually, all of them arrive.</p>
+<p>This is what makes the sketch generative. The ESP32 calculates the movement as it runs; it isn’t playing a saved animation. After the new building has been visible for a while, it fades and the house returns for another journey.</p>
+</section>
+<section aria-labelledby="technical"><h2 id="technical">Working with a very small screen</h2>
+<p>Getting the board connected was one of the first practical problems. At one point it wasn’t appearing as a USB device, and the screen wasn’t lighting up. Reconnecting the USB-C cable, including turning the connector over, got it working. Seeing the original Wi-Fi and voltage demo also helped distinguish the board’s factory program from the artwork I was trying to upload.</p>
+<p>The main visual challenge was making the story readable at only 240 × 135 pixels. Detailed buildings had to be resized and stored as image data the display could use. Each image is divided into small pieces, with a matching destination for every traveler. The keepsake appears during the journey, then blends into the new building near the end.</p>
+<p>The program draws a complete frame off-screen before sending it to the display to reduce flicker. It also limits how many pieces can travel at once. These choices help the movement stay readable without losing the feeling of separate, unpredictable journeys.</p>
+</section>
+</div>
+<section aria-labelledby="envelope"><div class="copy"><h2 id="envelope">Taking it off the desk</h2><p>I drew the envelope to continue the story around the screen: the Lebanese and American flags, cedars, a yellow taxi, and a plane following a dashed route between the two sides. The first photo below is from the drawing stage. The opening is still empty because the ESP32 hadn’t been attached yet.</p></div>
+<div class="photos"><figure><img src="media/envelope-in-progress.jpg" alt="Hand-drawn flags, cedars, a plane, and a yellow taxi on the paper envelope, with an empty rectangular screen opening." loading="lazy" width="1200" height="1600"><figcaption>Preparing the envelope on the classroom table, before attaching the board.</figcaption></figure><figure><img src="media/installation.jpg" alt="The completed envelope suspended by string near the classroom window, with the ESP32 animation visible through its opening." loading="lazy" width="1200" height="1600"><figcaption>The finished piece hanging by the window during the class installation.</figcaption></figure></div>
+<div class="copy"><p>With the board in place, the screen sits between the two drawn countries. The envelope gives the animation a physical setting, while the small moving keepsakes carry the more personal part of the story.</p></div></section>
+<div class="copy end"><p><a href="https://github.com/keira-columbia/creative-embedded-systems/tree/main/module-1">View the code and replication instructions on GitHub →</a></p><p>The README includes the hardware, library versions, upload steps, and a close-up GIF of the screen.</p></div>
+</main><footer>Kira Dabbagh · COMS BC 3930 · Creative Embedded Systems</footer>
+</div>
+</body>
+</html>
