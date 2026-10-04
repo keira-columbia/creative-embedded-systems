@@ -2,13 +2,11 @@
 
 **Kira Dabbagh · Module 1: Generative Art · Creative Embedded Systems, Fall 2026**
 
-This piece comes from my move from Lebanon to New York. I wanted to show that moving away does not mean leaving everything behind. Family, small routines, and memories travel with you and become part of the next place you call home.
-
-A traditional Lebanese stone house slowly breaks apart. Its pieces turn into small cedars, coffee cups, people, grandparents, and suitcases. They take different paths across the screen before coming together as a glass skyscraper in New York. One sun rises over Lebanon and sets in New York, connecting the two places. The warm orange and cool blue backgrounds emphasize how different these homes feel.
+Inspired by my move from Lebanon to New York, this piece shows the things we carry from one home to another. A Lebanese stone house breaks into cedars, coffee cups, family figures, and suitcases, which travel across the screen and rebuild as a New York skyscraper. One sun connects the warm Lebanese sky to the cool New York skyline.
 
 ![Device recording: a Lebanese home becomes keepsakes that travel to a New York skyscraper.](media/migration.gif)
 
-*Cropped from a recording of the actual board, at normal speed. The GIF captures one journey; the device generates new ones each time. [Watch the full video with audio](https://drive.google.com/file/d/1OigV7Otc-mpTzNrZS5rKmh2dtK5_G-JO/view).*
+*Cropped from a recording of the actual board, at normal speed. The GIF captures one journey; the device generates new ones each time.*
 
 ## What makes it generative?
 
@@ -68,7 +66,7 @@ The display setup handles the board’s built-in connections: MOSI 19, clock 18,
 
 - [`migration/migration.ino`](migration/migration.ino): movement, timing, the single sun, the sky, and the small keepsake drawings.
 - [`migration/photos.h`](migration/photos.h): generated RGB565 image data, transparency, and tile positions. It is included so you can upload without converting any images yourself.
-- [`migration/assets/`](migration/assets/): the original building images and their generation prompts.
+- [`migration/assets/`](migration/assets/): the two building images used by the sketch.
 - [`tools/prepare_photos.py`](tools/prepare_photos.py): optional image conversion script. It requires Python and Pillow; it is not needed to run the supplied sketch.
 
 `prepareJourney()` chooses a piece’s route and timing. `updateParticles()` moves the pieces between four states: home, traveling, settled, and returning. `renderFragment()` draws the building pieces, while `renderKeepsake()` briefly turns each traveler into its symbol. `renderSky()` moves the same sun from left to right. The finished frame is drawn off-screen and then sent to the display to reduce flicker.
@@ -77,14 +75,12 @@ To experiment, change `MIGRATION_SPEED` near the top of the sketch, the waiting 
 
 ## Installation documentation
 
-The class installation was scheduled for October 1–2, 2026, with battery-powered boards hanging in small paper envelopes. The [device demo](https://drive.google.com/file/d/1OigV7Otc-mpTzNrZS5rKmh2dtK5_G-JO/view) and the still below show the working board on a table. They do not show the hanging envelope installation; a photo of that setup is not included yet.
+The class installation ran October 1–2, 2026, with battery-powered boards hanging in small paper envelopes. This still shows the working board before installation; photos of the display in class will be added here.
 
 ![The TTGO T-Display running Migration, with keepsakes moving between the two homes.](media/device-still.jpg)
 
 *Still extracted from the device demo.*
 
-## Credits
+## Libraries and assets
 
-The idea and visual direction are based on my experience moving from Lebanon to New York. I developed the sketch with assistance from OpenAI Codex. The two architectural images were made with OpenAI’s image generator; they are imagined buildings, not photographs of my actual homes. The prompts are saved in [`generation-prompts.json`](migration/assets/generation-prompts.json).
-
-The display uses [Bodmer’s TFT_eSPI](https://github.com/Bodmer/TFT_eSPI) and the [Espressif Arduino core](https://github.com/espressif/arduino-esp32). The hardware setup builds on the course’s Lab 1 TFT display exercise.
+The display uses [Bodmer’s TFT_eSPI](https://github.com/Bodmer/TFT_eSPI) and the [Espressif Arduino core](https://github.com/espressif/arduino-esp32). The hardware setup builds on the course’s Lab 1 TFT display exercise. The building images are imagined homes, rather than photographs of my own homes.
