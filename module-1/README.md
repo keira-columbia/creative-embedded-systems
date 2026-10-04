@@ -6,9 +6,9 @@ This piece comes from my move from Lebanon to New York. I wanted to show that mo
 
 A traditional Lebanese stone house slowly breaks apart. Its pieces turn into small cedars, coffee cups, people, grandparents, and suitcases. They take different paths across the screen before coming together as a glass skyscraper in New York. One sun rises over Lebanon and sets in New York, connecting the two places. The warm orange and cool blue backgrounds emphasize how different these homes feel.
 
-![Animated screen preview: a Lebanese home becomes keepsakes that travel to a New York skyscraper.](media/migration.gif)
+![Device recording: a Lebanese home becomes keepsakes that travel to a New York skyscraper.](media/migration.gif)
 
-*This GIF is a software-rendered preview of the sketch, not a recording of the physical installation. It shows one run at approximately normal speed. The device generates new journeys each time.*
+*Cropped from a recording of the actual board, at normal speed. The GIF captures one journey; the device generates new ones each time. [Watch the full video with audio](https://drive.google.com/file/d/1OigV7Otc-mpTzNrZS5rKmh2dtK5_G-JO/view).*
 
 ## What makes it generative?
 
@@ -77,7 +77,11 @@ To experiment, change `MIGRATION_SPEED` near the top of the sketch, the waiting 
 
 ## Installation documentation
 
-The class installation was scheduled for October 1–2, 2026, with battery-powered boards hanging in small paper envelopes. [Installation-day video](https://drive.google.com/file/d/1OigV7Otc-mpTzNrZS5rKmh2dtK5_G-JO/view). The GIF above documents the screen design; the recording documents the physical device. Installation photos are not included yet.
+The class installation was scheduled for October 1–2, 2026, with battery-powered boards hanging in small paper envelopes. The [device demo](https://drive.google.com/file/d/1OigV7Otc-mpTzNrZS5rKmh2dtK5_G-JO/view) and the still below show the working board on a table. They do not show the hanging envelope installation; a photo of that setup is not included yet.
+
+![The TTGO T-Display running Migration, with keepsakes moving between the two homes.](media/device-still.jpg)
+
+*Still extracted from the device demo.*
 
 ## Credits
 
