@@ -75,7 +75,7 @@ To experiment, change `MIGRATION_SPEED` near the top of the sketch, the waiting 
 
 ## Installation
 
-For the October 1–2 class installation, I decorated a paper envelope with Lebanese and American flags, cedars, a yellow taxi, and a plane traveling between the two places. The screen sits in the center, and the finished piece hangs by a window.
+For the October 1 class installation, I decorated a paper envelope with Lebanese and American flags, cedars, a yellow taxi, and a plane traveling between the two places. The screen sits in the center, and the finished piece hangs by a window.
 
 <img src="media/installation.jpg" alt="The decorated envelope hanging by the classroom window, with the ESP32 screen running in the center." width="420">
 
