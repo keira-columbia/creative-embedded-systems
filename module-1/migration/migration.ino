@@ -22,6 +22,7 @@ const uint16_t BACKGROUND = 0x0041; // Almost-black midnight blue.
 enum Phase : uint8_t { AT_HOME, TRAVELING, SETTLED, RETURNING };
 enum Scene : uint8_t { HOLD_HOME, MIGRATING, HOLD_CITY, RENEWING };
 struct Particle {
+  // A piece has a position in each building and its own travel timing.
   Phase phase; // Still home, on the way, arrived, or fading for the next cycle.
   int destinationTile;
   float age, wait, progress, duration; // Seconds, except progress (0 to 1).
@@ -46,7 +47,11 @@ float sunJourney = 0.0f;
 
 float clamp01(float x) { return fmaxf(0.0f, fminf(1.0f, x)); }
 float mix(float a, float b, float t) { return a + (b - a) * t; }
-float smooth(float t) { t = clamp01(t); return t * t * (3.0f - 2.0f * t); }
+// Ease in and out, so pieces do not start and stop abruptly.
+float smooth(float t) {
+  t = clamp01(t);
+  return t * t * (3.0f - 2.0f * t);
+}
 // Arduino random() returns integers; this gives us a value between two floats.
 float chance(float low, float high) {
   return mix(low, high, random(1000000L) / 1000000.0f);
@@ -87,7 +92,9 @@ void beginChapter(bool first) {
   // Shuffle once so every new-home tile gets exactly one traveler.
   for (int i = PARTICLES - 1; i > 0; i--) {
     int j = random(i + 1);
-    int temp = order[i]; order[i] = order[j]; order[j] = temp;
+    int temp = order[i];
+    order[i] = order[j];
+    order[j] = temp;
   }
   for (int i = 0; i < PARTICLES; i++) {
     prepareJourney(particles[i], i, first);
@@ -251,6 +258,7 @@ void renderKeepsake(const Particle &p, int index) {
   }
 }
 
+// This is the image-drawing part: match pixels from the two building tiles.
 void renderFragment(const Particle &p, int index) {
   const PhotoTile &source = HOME_TILES[index];
   const PhotoTile &target = CITY_TILES[p.destinationTile];
