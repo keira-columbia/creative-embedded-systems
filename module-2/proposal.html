@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your Turn · Module 2 Proposal · Kira Dabbagh</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#fcf8ff;color:#30213e;font:17px/1.65 Arial,Helvetica,sans-serif}main{max-width:820px;margin:auto;padding:36px 30px 55px}nav{font-size:14px;margin-bottom:28px}a{color:#8244b0;text-underline-offset:3px}h1{font:normal 46px/1.15 Georgia,serif;margin:0 0 8px;color:#713998}h2{font:normal 23px/1.3 Georgia,serif;margin:25px 0 12px}.byline{font-size:14px;color:#695575;margin:0 0 26px}p{margin:0 0 16px}ul{padding-left:23px}li{padding-left:3px;margin:7px 0}a:focus-visible{outline:2px solid #8244b0;outline-offset:4px}@media print{@page{size:letter;margin:.6in}body{background:white;color:black;font:11pt/1.25 Arial,sans-serif}main{max-width:none;padding:0}nav{display:none}h1{font-size:24pt;color:black}h2{font-size:14pt;margin:13px 0 7px}.byline{font-size:10pt;margin-bottom:14px}p{margin-bottom:9px}li{margin:4px 0}a{color:black;text-decoration:none}}
+</style>
+</head>
+<body><main>
+<nav><a href="../">← Creative Embedded Systems</a></nav>
+<h1>Your Turn</h1>
+<p class="byline">Kira Dabbagh · Module 2: Interactive Devices · Project Proposal · October 15, 2026</p>
+<section id="proposal">
+<h2>Project idea and goals</h2>
+<p>For this project, I want to build a small physical controller that lets someone create a short dance on a laptop screen. I have been dancing ballet for eighteen years, so movement is something I connect with personally. I wanted to use that experience in a project that someone without dance training could also enjoy. Rather than asking visitors to perform ballet themselves, “Your Turn” will let them make choices for a dancer and watch those choices become a sequence.</p>
+<p>The screen will show a simple stage and a stylized 2D dancer. The visitor will use a joystick to move a spotlight or marker to the dancer’s next position. Turning a potentiometer will select one of three movements: a plié, a turn, or a jump. The selected movement will be labeled on screen so the visitor does not have to recognize ballet terminology. Pressing a separate button will add the movement and its position to the choreography, and the dancer will perform that step as feedback.</p>
+<p>After four choices, the program will play the whole sequence in order. It will then return to the selection stage so the visitor can create another dance. A small on-screen list will show the choices already made. My goal is for the controls to feel understandable through trying them: move to a place, choose an action, and press to add it. Each of the three required components will have a distinct purpose.</p>
+<p>My main inspiration is my own experience learning ballet combinations, where individual movements become a phrase through their order and placement. The Lab 2 joystick exercise is my technical starting point: it already connects physical movement to a circle in Processing. I plan to extend that relationship into choosing positions on a stage. The project will focus on the experience of composing movement, rather than accurate simulation of a human body.</p>
+<p>The ESP32 will read the joystick, potentiometer, and button through a breadboard circuit and send their values to the laptop over USB serial. Processing will interpret the readings and draw the stage and animations. To keep the project manageable, I will begin with one working movement before adding the other two and sequence playback. The dancer will use simple shapes and short animations so the interaction remains the priority.</p>
+<h2>Tasks to complete</h2>
+<ul>
+<li>Connect all three controls to the ESP32 and check each sensor’s readings separately.</li>
+<li>Write the ESP32 sketch to send consistently formatted sensor values over serial.</li>
+<li>Build the stage, position marker, movement selector, and four-step list in Processing.</li>
+<li>Create recognizable plié, turn, and jump animations for the dancer.</li>
+<li>Add button debouncing and stable knob selection so one action produces one clear choice.</li>
+<li>Implement sequence storage, playback, and a reset for the next visitor.</li>
+<li>Test with classmates, adjust confusing controls, and record the full interaction for the showcase.</li>
+<li>Document the wiring with a Fritzing diagram and prepare the code, README, and final blog post.</li>
+</ul>
+</section>
+</main></body></html>
