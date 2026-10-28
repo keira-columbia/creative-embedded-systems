@@ -14,10 +14,6 @@ The dancer and stage are drawn with shapes in Processing. There are no sprite fi
 - LED and 220-ohm series resistor
 - USB data cable and a laptop with Arduino IDE and Processing
 
-## Visual documentation — still to add
-
-The demonstration GIF and a Fritzing breadboard diagram of the finished circuit are pending. The wiring table below records the final code connections; it does not replace the required Fritzing diagram.
-
 ## Project code
 
 - [controller/controller.ino](controller/controller.ino): reads the physical controls and sends their values over USB.
