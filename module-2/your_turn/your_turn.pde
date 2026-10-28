@@ -19,24 +19,31 @@ int phase = 0;
 int previousFrame;
 boolean demo = false;
 
-void setup() {
-  size(1080, 760);
+void settings() {
+  fullScreen();
   pixelDensity(1);
   smooth(4);
+}
+
+void setup() {
   surface.setTitle("Your Turn — Ballet Studio");
   textFont(createFont("Arial", 18));
   previousFrame = millis();
 }
 
 void draw() {
+  // Fit the original stage to the screen without stretching the dancer.
+  float stageScale = min(width/1080.0, height/760.0);
+  float offsetX = (width-1080*stageScale)/2;
+  float offsetY = (height-760*stageScale)/2;
   readController();
   float dt = min((millis()-previousFrame)/1000.0, 0.05);
   previousFrame = millis();
   boolean live = millis()-lastPacket < 1200;
   if (phase == 0 && (live || demo)) {
     if (demo) {
-      markerX = constrain(mouseX, 180, 900);
-      markerY = constrain(mouseY, 365, 535);
+      markerX = constrain((mouseX-offsetX)/stageScale, 180, 900);
+      markerY = constrain((mouseY-offsetY)/stageScale, 365, 535);
     } else {
       markerX = constrain(markerX + axis(stickX)*260*dt, 180, 900);
       markerY = constrain(markerY + axis(stickY)*150*dt, 365, 535);
@@ -45,7 +52,6 @@ void draw() {
       if (selected > 0 && knob < selected*1365-90) selected--;
     }
   }
-  drawStage(live);
   float progress = 0;
   int movement = selected;
   if (phase == 1 || phase == 2) {
@@ -65,8 +71,13 @@ void draw() {
       else { phase = 3; phaseStart = millis(); }
     }
   }
+  pushMatrix();
+  translate(offsetX, offsetY);
+  scale(stageScale);
+  drawStage(live);
   drawDancer(dancerX, dancerY, movement, progress);
   drawChoices();
+  popMatrix();
 }
 
 float axis(float value) {
@@ -158,9 +169,12 @@ void drawStage(boolean live) {
   stroke(166,125,108);strokeWeight(1);
   for(int y=370;y<575;y+=35) line(130,y,950,y);
   for(int x=130;x<=950;x+=82) line(540+(x-540)*0.6,350,x,575);
-  noStroke();fill(255,238,194,45);triangle(markerX,155,markerX-90,markerY,markerX+90,markerY);
-  fill(255,238,194,100);ellipse(markerX,markerY,140,40);
-  noFill();stroke(255,241,210);strokeWeight(2);ellipse(markerX,markerY,90,25);
+  // Follow the dancer during playback and keep the light on her at the end.
+  float lightX = phase >= 2 ? dancerX : markerX;
+  float lightY = phase >= 2 ? dancerY : markerY;
+  noStroke();fill(255,238,194,45);triangle(lightX,155,lightX-90,lightY,lightX+90,lightY);
+  fill(255,238,194,100);ellipse(lightX,lightY,140,40);
+  noFill();stroke(255,241,210);strokeWeight(2);ellipse(lightX,lightY,90,25);
   noStroke();fill(255,239,224);textAlign(CENTER);textSize(18);
   String caption = phase==0 ? "Choose a place and a movement" : phase==1 ? "Step "+count+" added" : phase==2 ? "Your dance · step "+(playing+1)+" of 4" : "Take a bow! Close and rerun the sketch for a new dance.";
   text(caption,540,160);textAlign(LEFT);
