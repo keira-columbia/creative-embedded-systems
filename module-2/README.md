@@ -6,6 +6,10 @@ Move the **joystick** to choose a spot, turn the **potentiometer** to select a p
 
 [Read the project story](https://keira-columbia.github.io/creative-embedded-systems/module-2/) for the process, early test videos, and short code explanations.
 
+![The ballerina performing the recorded four-step sequence in Processing.](media/dance-preview.gif)
+
+A short loop from my controller demo, recorded before the later spotlight and full-screen updates. [Watch the demonstration with the physical controls](https://keira-columbia.github.io/creative-embedded-systems/module-2/#watch-demo).
+
 ## What you need
 
 - Original ESP32 TTGO T-Display with soldered headers (this build uses the original board, not the S3)
