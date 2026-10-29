@@ -44,6 +44,8 @@ Keep the potentiometer's three terminals on separate electrical connections, not
 
 The button uses an internal pull-up resistor, so it does not need an external one. The LED lights while you hold the button. The joystick's click is read but does not add steps; that is the separate button's job.
 
+![My assembled controller, with the potentiometer, yellow button, LED, and joystick.](media/final-controller.jpg)
+
 ## Upload the ESP32 program
 
 1. Download this repository and keep the sketch folders intact.
