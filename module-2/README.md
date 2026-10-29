@@ -44,7 +44,14 @@ Keep the potentiometer's three terminals on separate electrical connections, not
 
 The button uses an internal pull-up resistor, so it does not need an external one. The LED lights while you hold the button. The joystick's click is read but does not add steps; that is the separate button's job.
 
-![My assembled controller, with the potentiometer, yellow button, LED, and joystick.](media/final-controller.jpg)
+<p>
+  <a href="media/final-controller.jpg"><img src="media/final-controller.jpg" height="300" alt="My assembled controller with the potentiometer, button, LED, and joystick."></a>
+  <a href="media/your-turn-circuit.svg"><img src="media/your-turn-circuit.svg" height="300" alt="Fritzing connection diagram of the final controller."></a>
+</p>
+
+My finished controller beside its **Fritzing connection diagram**. Click either image to enlarge it. The diagram uses simplified custom parts and shows the electrical connections, not exact breadboard holes. The shared-supply symbol represents 3.3V and ground connections, not an extra component. Use the table above and the board's pin labels when wiring.
+
+[Download the editable Fritzing file](circuit/your-turn.fzz).
 
 ## Upload the ESP32 program
 
@@ -80,3 +87,7 @@ To try the visuals without hardware, press **D** before adding any steps. Move t
 ## Starting point
 
 The controller builds on our course's [Lab 2: Breadboarding, Sensing, & Serial Communication](https://comsbc3930-fall-2026.notion.site/Lab-2-Breadboarding-Sensing-Serial-Communication-da2350cc6f0583789b5d816f36e83bbe). The [proposal](proposal.html) records the original plan; the [blog](https://keira-columbia.github.io/creative-embedded-systems/module-2/) describes how the project developed.
+
+## AI support
+
+The [note at the end of my blog](https://keira-columbia.github.io/creative-embedded-systems/module-2/#ai-support) describes the OpenAI support, model, and example prompts used for this project.
