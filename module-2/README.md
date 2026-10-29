@@ -49,7 +49,7 @@ The button uses an internal pull-up resistor, so it does not need an external on
   <a href="media/your-turn-circuit.svg"><img src="media/your-turn-circuit.svg" height="300" alt="Fritzing connection diagram of the final controller."></a>
 </p>
 
-My finished controller beside its **Fritzing connection diagram**. Click either image to enlarge it. The diagram uses simplified custom parts and shows the electrical connections, not exact breadboard holes. The shared-supply symbol represents 3.3V and ground connections, not an extra component. Use the table above and the board's pin labels when wiring.
+My finished controller beside its **Fritzing connection diagram**. Click either image to enlarge it. The diagram reconstructs the class Lab 2 arrangement on a longer breadboard like mine: button above the LED and resistor, TTGO below, and joystick beside it. I added the potentiometer above the button, with its output on **13** and its other terminals on **3V** and **G**. It uses custom drawn parts; wire colors and exact hole positions may differ from my photo. Follow the pin labels and table above when rebuilding.
 
 [Download the editable Fritzing file](circuit/your-turn.fzz).
 
