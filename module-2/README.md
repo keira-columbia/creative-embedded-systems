@@ -36,7 +36,23 @@ Unplug USB before wiring. The photo shows my build; click the diagram to see the
 
 **No controller?** Press **D** before the first step. Move the mouse to place the spotlight, press **1**, **2**, or **3** to choose a movement, and **Space** to add it.
 
-## How a jump makes it into the dance
+## What the controller taught me
+
+### Why the LED lit up but the circle stayed still
+
+My first joystick test was a Processing sketch that moved a circle around the screen. When I added the knob and yellow button, pressing the button still lit the LED, but moving the joystick no longer moved the circle. The LED was controlled by the ESP32 itself. It could light up even if the laptop ignored every reading.
+
+The old sketch expected three numbers per line. The [ESP32 program](controller/controller.ino) was now sending five: X, Y, joystick click, knob, and yellow button. Here’s the part of the [Processing receiver](your_turn/your_turn.pde) that separates one reading from the next:
+
+```java
+String[] values = split(trim(incoming), ',');
+incoming = "";
+if (values.length != 5) continue;
+```
+
+This runs when a newline arrives. Clearing `incoming` makes room for the next reading; `continue` skips a line that doesn’t have five fields. Changing the receiver to match the board got me past the frozen circle. Now, if a control stops responding, I know why checking what Processing receives tells me more than looking at the power or button light.
+
+### How a jump makes it into the dance
 
 Say I put a jump on the left side of the stage, then turn the knob to try a plié on the right. I still want that first jump back when the dance plays. The yellow button is what separates trying out an idea from keeping it. When I press it, [the Processing sketch](your_turn/your_turn.pde) runs this function:
 
@@ -56,6 +72,17 @@ void addStep() {
 
 Those three assignments save the spot and the movement in the same numbered slot. The dancer previews the step right away; the first line keeps another press during that preview from taking up a second slot. After the fourth preview, playback goes back to slot zero and reads the four choices in order.
 
-That distinction mattered for the lighting, too. When I first watched the whole dance, the dancer moved on but the spotlight stayed behind. While I’m choosing a spot, the light belongs under the joystick. During playback, it follows the dancer’s current position, so it travels with her between steps.
+### Why the spotlight stayed behind
+
+When I watched the four steps play back, the dancer moved away from the spot where I’d left the joystick. I wanted the light to travel with her, including the moment *between* two steps. This is the part of the animation loop that gives her a position on every frame:
+
+```java
+float travel = constrain(elapsed / 650, 0, 1);
+float eased = travel * travel * (3 - 2 * travel);
+dancerX = lerp(fromX, stepX[i], eased);
+dancerY = lerp(fromY, stepY[i], eased);
+```
+
+For each step, `travel` goes from 0 to 1 over 650 milliseconds. The middle line softens the start and stop; the two `lerp` calls place her partway between where she started and where she’s going. I already had the coordinates the light needed. In `drawStage()`, I used the joystick’s marker while choosing and `dancerX` and `dancerY` during playback. Using the saved destination instead would have made the light jump ahead and wait for her.
 
 Controller adapted from the course’s [Lab 2](https://comsbc3930-fall-2026.notion.site/Lab-2-Breadboarding-Sensing-Serial-Communication-da2350cc6f0583789b5d816f36e83bbe). [AI support note](https://keira-columbia.github.io/creative-embedded-systems/module-2/#ai-support).
