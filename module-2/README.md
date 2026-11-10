@@ -42,7 +42,14 @@ Unplug USB before wiring. The photo shows my build; click the diagram to see the
 
 My first joystick test was a Processing sketch that moved a circle around the screen. When I added the knob and yellow button, pressing the button still lit the LED, but moving the joystick no longer moved the circle. The LED was controlled by the ESP32 itself. It could light up even if the laptop ignored every reading.
 
-The old sketch expected three numbers per line. The [ESP32 program](controller/controller.ino) was now sending five: X, Y, joystick click, knob, and yellow button. Here’s the part of the [Processing receiver](your_turn/your_turn.pde) that separates one reading from the next:
+The difference shows up in two lines of the [Arduino sketch](controller/controller.ino). One drives a physical pin. The other sends a message over USB:
+
+```cpp
+digitalWrite(ledPin, button == LOW ? HIGH : LOW);
+Serial.printf("%d,%d,%d,%d,%d\n", x, y, joystickSwitch, knob, button);
+```
+
+My old circle sketch expected three numbers per line. Once I added the knob and separate button, it needed to accept five. In the [final Processing sketch](your_turn/your_turn.pde), this runs when the newline arrives:
 
 ```java
 String[] values = split(trim(incoming), ',');
@@ -50,7 +57,18 @@ incoming = "";
 if (values.length != 5) continue;
 ```
 
-This runs when a newline arrives. Clearing `incoming` makes room for the next reading; `continue` skips a line that doesn’t have five fields. Changing the receiver to match the board got me past the frozen circle. Now, if a control stops responding, I know why checking what Processing receives tells me more than looking at the power or button light.
+That changed how I tested the controller. Pressing the button could tell me the circuit worked. To find out why the circle was stuck, I had to compare what Arduino actually sent with what Processing would accept.
+
+### Turning a noisy knob into three choices
+
+During testing, I could leave the knob alone and still see the numbers change. There were two different problems to sort out. First, I’d wired the knob’s output to pin 13, so the Arduino sketch had to read **13**, not 27. Once turning it actually changed the reading, the question was how to keep a small fluctuation from changing the dancer’s step.
+
+```java
+if (selected < 2 && knob > (selected + 1) * 1365 + 90) selected++;
+if (selected > 0 && knob < selected * 1365 - 90) selected--;
+```
+
+The first boundary is 1365. Starting on plié, the knob has to pass 1455 to select turn. Coming back from turn, it has to fall below 1275 to select plié again. So if the reading wobbles around 1365, the dancer keeps whichever move I last chose. What mattered to me was being able to let go of the knob, reach for the yellow button, and trust that I was still adding the same move.
 
 ### How a jump makes it into the dance
 
@@ -77,12 +95,14 @@ Those three assignments save the spot and the movement in the same numbered slot
 When I watched the four steps play back, the dancer moved away from the spot where I’d left the joystick. I wanted the light to travel with her, including the moment *between* two steps. This is the part of the animation loop that gives her a position on every frame:
 
 ```java
+int i = phase == 1 ? count - 1 : playing;
+float elapsed = millis() - phaseStart;
 float travel = constrain(elapsed / 650, 0, 1);
 float eased = travel * travel * (3 - 2 * travel);
 dancerX = lerp(fromX, stepX[i], eased);
 dancerY = lerp(fromY, stepY[i], eased);
 ```
 
-For each step, `travel` goes from 0 to 1 over 650 milliseconds. The middle line softens the start and stop; the two `lerp` calls place her partway between where she started and where she’s going. I already had the coordinates the light needed. In `drawStage()`, I used the joystick’s marker while choosing and `dancerX` and `dancerY` during playback. Using the saved destination instead would have made the light jump ahead and wait for her.
+The preview reads the newest slot (`count - 1`); playback reads the slot named by `playing`. That one choice lets the same animation run both times. For each step, `travel` goes from 0 to 1 over 650 milliseconds. The middle line softens the start and stop; the two `lerp` calls place her partway between where she started and where she’s going. I already had the coordinates the light needed. In `drawStage()`, I used the joystick’s marker while choosing and `dancerX` and `dancerY` during playback. Using the saved destination instead would have made the light jump ahead and wait for her.
 
-Controller adapted from the course’s [Lab 2](https://comsbc3930-fall-2026.notion.site/Lab-2-Breadboarding-Sensing-Serial-Communication-da2350cc6f0583789b5d816f36e83bbe). [AI support note](https://keira-columbia.github.io/creative-embedded-systems/module-2/#ai-support).
+Controller adapted from the course’s [Lab 2](https://comsbc3930-fall-2026.notion.site/Lab-2-Breadboarding-Sensing-Serial-Communication-da2350cc6f0583789b5d816f36e83bbe).
