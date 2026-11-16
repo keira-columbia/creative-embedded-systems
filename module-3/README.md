@@ -25,4 +25,6 @@ When both players press Ready, both screens should start the same three-second c
 
 If a screen stays on **Waiting for other board**, check the role labels first. You should have one **LEFT OAR** and one **RIGHT OAR**. If both labels match, upload the other sketch to one board. If the roles are correct, check that both sketches have the same `TEAM` number.
 
-[Watch the two-player demo and read Kira’s design notes](https://keira-columbia.github.io/creative-embedded-systems/module-3/) · [Professor Tseng’s starter sketch](https://github.com/ttseng/bccoms3930-module-3)
+[Watch the two-player demo and read Kira’s design notes](https://keira-columbia.github.io/creative-embedded-systems/module-3/?v=boat-views-2) · [Professor Tseng’s starter sketch](https://github.com/ttseng/bccoms3930-module-3)
+
+[Compare the original side view and the final view from the boat](https://keira-columbia.github.io/creative-embedded-systems/module-3/?v=boat-views-2#boat-views)
